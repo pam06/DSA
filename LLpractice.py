@@ -36,9 +36,31 @@ class LinkedList:
         if self.count == 1:
             self.tail = self.head
 
+    def removeHead(self):
+        if self.count > 0:
+            self.head = self.head.next
+            self.count -= 1
+            if self.count == 0:
+                self.tail = None
+
+    def removeTail(self):
+        if self.count > 0:
+            if self.count == 1:
+                self.head = self.tail = None
+            else:
+                current = self.head
+                while current.next != self.tail:
+                    current = current.next
+                current.next = None
+                self.tail = current
+                self.count -= 1
+
+
 LL = LinkedList()
 LL.appendLL(10)
 LL.appendLL(20)
 LL.prepandLL(30)
+LL.removeHead()
+LL.removeTail()
 LL.printLL()
 
