@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.value = data
         self.next = None
 
@@ -18,7 +18,7 @@ class LinkedList:
             print("->", current.value, end="")
             current = current.next
 
-    def appendLL(self, data):
+    def appendLL(self, data=None):
         newNode = Node(data)
         if self.count == 0:
             self.head = newNode
@@ -27,7 +27,7 @@ class LinkedList:
         self.tail = newNode
         self.count += 1
 
-    def prepandLL(self, data):
+    def prepandLL(self, data=None):
         newNode = Node(data)
         temp = self.head
         newNode.next = temp
@@ -55,12 +55,25 @@ class LinkedList:
                 self.tail = current
                 self.count -= 1
 
+    def insertLL(self, prev, data=None):
+        newNode = Node(data)
+        current = self.head
+        while current is not None:
+            if current.value == prev:
+                temp = current.next
+                current.next = newNode
+                newNode.next = temp
+            if current.next is None:
+                self.tail = newNode
+            self.count += 1
+            return True
+            current = current.next
+
 
 LL = LinkedList()
 LL.appendLL(10)
 LL.appendLL(20)
 LL.prepandLL(30)
-LL.removeHead()
-LL.removeTail()
+LL.insertLL(30, 60)
 LL.printLL()
 
